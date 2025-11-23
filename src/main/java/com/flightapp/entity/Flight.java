@@ -26,5 +26,5 @@ public class Flight {
     private int availableSeats;
     private long oneWayPrice;
     private long roundTripPrice;
-    private List<Seat> seats = new ArrayList<>();
+    private List<String> seats = new ArrayList<>();
 }

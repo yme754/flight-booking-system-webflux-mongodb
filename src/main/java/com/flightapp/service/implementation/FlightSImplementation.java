@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.flightapp.entity.Flight;
-import com.flightapp.entity.Seat;
 import com.flightapp.repository.FlightRepository;
 import com.flightapp.service.FlightService;
 
@@ -22,11 +21,9 @@ public class FlightSImplementation implements FlightService{
 	}
 	@Override
 	public Mono<Flight> addFlightInventory(Flight flight) {
-		List<Seat> seats = new ArrayList<>();
+		List<String> seats = new ArrayList<>();
         int seatCnt = flight.getAvailableSeats();
-        for (int i = 1; i <= seatCnt; i++) {
-            seats.add(new Seat("S" + i, true));
-        }
+        for (int i = 1; i <= seatCnt; i++) seats.add("S" + i);
         flight.setSeats(seats);
         return flightRepo.save(flight);
 	}

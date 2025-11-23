@@ -1,5 +1,7 @@
 package com.flightapp.controller;
 
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,8 +27,15 @@ public class AirlineController {
     }
 	
 	@GetMapping("/inventory")
-	public Flux<Flight> getAllInventory() {
-	    return flightService.getAllFlights();
+	public Flux<Map<String, Object>> getAllInventory() {
+	    return flightService.getAllFlights()
+	        .map(f -> Map.of(
+	            "id", f.getId(),
+	            "airlineId", f.getAirlineId(),
+	            "fromPlace", f.getFromPlace(),
+	            "toPlace", f.getToPlace(),
+	            "availableSeats", f.getAvailableSeats(), "seats", f.getSeats()
+	        ));
 	}
 	
 	@PostMapping("/add")

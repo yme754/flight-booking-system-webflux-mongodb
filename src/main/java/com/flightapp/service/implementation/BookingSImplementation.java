@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.flightapp.entity.Booking;
-import com.flightapp.entity.Seat;
 import com.flightapp.repository.BookingRepository;
 import com.flightapp.repository.FlightRepository;
 import com.flightapp.service.BookingService;
@@ -34,16 +33,12 @@ public class BookingSImplementation implements BookingService{
                 if (flight.getAvailableSeats() < bookingRequest.getSeatCount()) {
                     return Mono.error(new RuntimeException("Not enough seats available"));
                 }
-                List<Seat> seats = flight.getSeats();
+                List<String> seats = flight.getSeats();
                 for (String seatNo : bookingRequest.getSeatNumbers()) {
-                    boolean updated = seats.stream()
-                        .filter(s -> s.getSeatNumber().equals(seatNo) && s.isAvailable())
-                        .peek(s -> s.setAvailable(false)).findFirst().isPresent();
-                    if (!updated) {
-                        return Mono.error(new RuntimeException("Seat " + seatNo + " not available"));
-                    }
+                    if (!seats.contains(seatNo)) 
+                    	return Mono.error(new RuntimeException("Seat " + seatNo + " not available"));
                 }
-                flight.setAvailableSeats(flight.getAvailableSeats() - bookingRequest.getSeatCount());
+                flight.setAvailableSeats(flight.getAvailableSeats()-bookingRequest.getSeatCount());
                 return flightRepo.save(flight)
                     .flatMap(updatedFlight -> {
                         bookingRequest.setFlightId(flightId);
