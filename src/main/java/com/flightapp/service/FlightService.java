@@ -1,5 +1,7 @@
 package com.flightapp.service;
 
+import org.springframework.http.ResponseEntity;
+
 import com.flightapp.entity.Flight;
 
 import reactor.core.publisher.Flux;
@@ -10,4 +12,5 @@ public interface FlightService {
     Flux<Flight> searchFlights(String fromPlace, String toPlace);
     Flux<Flight> getAllFlights();
     Mono<Flight> getFlight(String id);
+	Mono<ResponseEntity<Flight>> getFlightById(String flightId);
 }

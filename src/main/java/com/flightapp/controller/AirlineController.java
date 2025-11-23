@@ -23,15 +23,18 @@ public class AirlineController {
         this.airlineService = airlineService;
         this.flightService = flightService;
     }
+	
 	@GetMapping("/inventory")
 	public Flux<Flight> getAllInventory() {
 	    return flightService.getAllFlights();
 	}
+	
 	@PostMapping("/add")
     public Mono<Airline> addAirline(@RequestBody Airline airline) {
         return airlineService.addAirline(airline);
     }
-	@PostMapping("/inventory")
+	
+	@PostMapping("/inventory/add")
     public Mono<Flight> addInventory(@RequestBody Flight flight) {
         return flightService.addFlightInventory(flight);
     }

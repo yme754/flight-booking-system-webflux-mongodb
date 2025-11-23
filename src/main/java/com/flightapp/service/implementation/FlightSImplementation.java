@@ -3,6 +3,7 @@ package com.flightapp.service.implementation;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.flightapp.entity.Flight;
@@ -40,5 +41,10 @@ public class FlightSImplementation implements FlightService{
 	@Override
 	public Flux<Flight> getAllFlights() {
 		return flightRepo.findAll();
+	}
+	@Override
+	public Mono<ResponseEntity<Flight>> getFlightById(String flightId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

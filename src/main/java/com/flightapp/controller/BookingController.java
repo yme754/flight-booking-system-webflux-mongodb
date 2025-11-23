@@ -22,6 +22,7 @@ public class BookingController {
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
     }
+    
     @PostMapping("/booking/{flightId}")
     public Mono<Booking> bookTicket(
     		@PathVariable String flightId,
@@ -35,14 +36,17 @@ public class BookingController {
         booking.setTripType(request.getTripType());
         return bookingService.bookTicket(flightId, booking);
     }
+    
     @GetMapping("/ticket/{pnr}")
     public Mono<Booking> getTicket(@PathVariable String pnr) {
         return bookingService.getTicketByPnr(pnr);
     }
+    
     @GetMapping("/booking/history/{email}")
     public Flux<Booking> getHistory(@PathVariable String email) {
         return bookingService.getHistoryByEmail(email);
     }
+    
     @DeleteMapping("/booking/cancel/{pnr}")
     public Mono<Void> cancelTicket(@PathVariable String pnr) {
         return bookingService.cancelTicket(pnr);
