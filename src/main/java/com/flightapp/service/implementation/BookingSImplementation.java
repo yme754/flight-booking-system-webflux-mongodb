@@ -44,7 +44,6 @@ public class BookingSImplementation implements BookingService{
                                 bookingRequest.setFlightId(flightId);
                                 bookingRequest.setAirlineId(updatedFlight.getAirlineId());
                                 bookingRequest.setCreatedAt(LocalDateTime.now());
-                                bookingRequest.setStatus(BookingStatus.ACTIVE);
                                 bookingRequest.setPnr(generatePNR());
                                 return bookingRepo.save(bookingRequest);
                             });
@@ -63,14 +62,11 @@ public class BookingSImplementation implements BookingService{
         return bookingRepo.findByEmail(email);
 	}
 	@Override
-	public Mono<String> cancelTicket(String pnr) {
+	public Mono<Void> cancelTicket(String pnr) {
 		return bookingRepo.findByPnr(pnr)
-		        .flatMap(b -> {
-		            b.setStatus(BookingStatus.CANCELLED);
-		            return bookingRepo.save(b)
-		                    .then(Mono.just("Booking cancelled"));
-		        })
-		        .switchIfEmpty(Mono.error(new RuntimeException("Invalid PNR")));
+				return bookingRepo.findByPnr(pnr)
+			            .switchIfEmpty(Mono.error(new RuntimeException("Invalid PNR")))
+			            .flatMap(bookingRepo::delete);
 	}
 	
 }

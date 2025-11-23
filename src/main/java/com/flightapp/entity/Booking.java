@@ -35,5 +35,4 @@ public class Booking {
     private List<String> seatNumbers = new ArrayList<>();
     private long totalAmount;
     private LocalDateTime createdAt;
-    private BookingStatus status = BookingStatus.ACTIVE;
 }
