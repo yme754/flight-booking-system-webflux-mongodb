@@ -19,6 +19,9 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1.0/flight")
 public class FlightController {
     private FlightService flightService;
+    public FlightController(FlightService flightService) {
+    	this.flightService = flightService;
+    }
     
     @PostMapping("/search")
     public Flux<Flight> searchFlights(@RequestBody FlightSearchRequest req) {
