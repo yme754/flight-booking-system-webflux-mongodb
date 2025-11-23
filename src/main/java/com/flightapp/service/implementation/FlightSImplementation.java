@@ -37,4 +37,8 @@ public class FlightSImplementation implements FlightService{
 	public Mono<Flight> getFlight(Integer id) {
 		return flightRepo.findById(id);
 	}
+	@Override
+	public Flux<Flight> getAllFlights() {
+		return flightRepo.findAll();
+	}
 }
