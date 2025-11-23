@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.flightapp.entity.Booking;
 import com.flightapp.entity.Seat;
-import com.flightapp.entity.enums.BookingStatus;
 import com.flightapp.repository.BookingRepository;
 import com.flightapp.repository.FlightRepository;
 import com.flightapp.service.BookingService;
@@ -25,48 +24,54 @@ public class BookingSImplementation implements BookingService{
 		this.bookingRepo = bookingRepo;
 	}
 	@Override
-	public Mono<Booking> bookTicket(String flightId, Booking bookingRequest) {
-		return flightRepo.findById(flightId).flatMap(flight -> {
-                    if (bookingRequest.getSeatCount()!= bookingRequest.getSeatNumbers().size())
-                        return Mono.error(new RuntimeException("Seat count mismatch"));
-                    if (flight.getAvailableSeats() < bookingRequest.getSeatCount())
-                        return Mono.error(new RuntimeException("Not enough seats available"));
-                    List<Seat> seats = flight.getSeats();
-                    for (String seatNo : bookingRequest.getSeatNumbers()) {
-                        boolean updated = seats.stream()
-                                .filter(s -> s.getSeatNumber().equals(seatNo) && s.isAvailable())
-                                .peek(s -> s.setAvailable(false)).findFirst().isPresent();
-                        if (!updated) return Mono.error(new RuntimeException("Seat "+ seatNo + " not available"));
-                    }
-                    flight.setAvailableSeats(flight.getAvailableSeats()-bookingRequest.getSeatCount());
-                    return flightRepo.save(flight)
-                            .flatMap(updatedFlight -> {
-                                bookingRequest.setFlightId(flightId);
-                                bookingRequest.setAirlineId(updatedFlight.getAirlineId());
-                                bookingRequest.setCreatedAt(LocalDateTime.now());
-                                bookingRequest.setPnr(generatePNR());
-                                return bookingRepo.save(bookingRequest);
-                            });
-                });
-	}
+    public Mono<Booking> bookTicket(String flightId, Booking bookingRequest) {
 
-	private String generatePNR() {
-		return UUID.randomUUID().toString().substring(0, 6).toUpperCase();
-	}
-	@Override
-	public Mono<Booking> getTicketByPnr(String pnr) {
-		return bookingRepo.findByPnr(pnr);
-	}
-	@Override
-	public Flux<Booking> getHistoryByEmail(String email) {
+        return flightRepo.findById(flightId)
+            .flatMap(flight -> {
+                if (bookingRequest.getSeatCount() != bookingRequest.getSeatNumbers().size()) {
+                    return Mono.error(new RuntimeException("Seat count mismatch"));
+                }
+                if (flight.getAvailableSeats() < bookingRequest.getSeatCount()) {
+                    return Mono.error(new RuntimeException("Not enough seats available"));
+                }
+                List<Seat> seats = flight.getSeats();
+                for (String seatNo : bookingRequest.getSeatNumbers()) {
+                    boolean updated = seats.stream()
+                        .filter(s -> s.getSeatNumber().equals(seatNo) && s.isAvailable())
+                        .peek(s -> s.setAvailable(false)).findFirst().isPresent();
+                    if (!updated) {
+                        return Mono.error(new RuntimeException("Seat " + seatNo + " not available"));
+                    }
+                }
+                flight.setAvailableSeats(flight.getAvailableSeats() - bookingRequest.getSeatCount());
+                return flightRepo.save(flight)
+                    .flatMap(updatedFlight -> {
+                        bookingRequest.setFlightId(flightId);
+                        bookingRequest.setAirlineId(updatedFlight.getAirlineId());
+                        bookingRequest.setCreatedAt(LocalDateTime.now());
+                        bookingRequest.setPnr(generatePNR());
+                        return bookingRepo.save(bookingRequest);
+                    });
+            });
+    }
+    private String generatePNR() {
+        return UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+    }
+
+    @Override
+    public Mono<Booking> getTicketByPnr(String pnr) {
+        return bookingRepo.findByPnr(pnr);
+    }
+
+    @Override
+    public Flux<Booking> getHistoryByEmail(String email) {
         return bookingRepo.findByEmail(email);
-	}
-	@Override
-	public Mono<Void> cancelTicket(String pnr) {
-		return bookingRepo.findByPnr(pnr)
-				return bookingRepo.findByPnr(pnr)
-			            .switchIfEmpty(Mono.error(new RuntimeException("Invalid PNR")))
-			            .flatMap(bookingRepo::delete);
-	}
-	
+    }
+
+    @Override
+    public Mono<Void> cancelTicket(String pnr) {
+        return bookingRepo.findByPnr(pnr)
+            .switchIfEmpty(Mono.error(new RuntimeException("Invalid PNR")))
+            .flatMap(bookingRepo::delete);
+    }
 }

@@ -8,6 +8,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface BookingRepository extends ReactiveMongoRepository<Booking, String>{
-	Mono<Void> findByPnr(String pnr);
+	Mono<Booking> findByPnr(String pnr);
     Flux<Booking> findByEmail(String email);
 }
