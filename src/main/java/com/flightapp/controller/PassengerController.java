@@ -15,7 +15,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api/v1.0/flight/passenger")
+@RequestMapping("/api/flight/passenger")
 public class PassengerController {
 	private final PassengerService passengerService;
 
