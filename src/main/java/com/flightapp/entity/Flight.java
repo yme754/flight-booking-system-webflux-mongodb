@@ -1,4 +1,4 @@
-package com.flight.entity;
+package com.flightapp.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -24,6 +24,7 @@ public class Flight {
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
     private int availableSeats;
-    private long price;
+    private long oneWayPrice;
+    private long roundTripPrice;
     private List<Seat> seats = new ArrayList<>();
 }

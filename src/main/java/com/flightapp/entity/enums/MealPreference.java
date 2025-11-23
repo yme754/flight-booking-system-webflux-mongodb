@@ -1,4 +1,4 @@
-package com.flight.entity.enums;
+package com.flightapp.entity.enums;
 
 public enum MealPreference {
 	VEG, NON_VEG

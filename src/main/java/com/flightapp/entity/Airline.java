@@ -1,4 +1,4 @@
-package com.flight.entity;
+package com.flightapp.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Airline {
 	@Id
 	private String id;
-    @NotBlank
+	@NotBlank(message= "Airline name cannot be blank")
     private String name;
     private String logoUrl;
 }

@@ -1,4 +1,4 @@
-package com.flight.entity;
+package com.flightapp.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,10 +7,11 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.flight.entity.enums.BookingStatus;
-import com.flight.entity.enums.MealPreference;
-import com.flight.entity.enums.TripType;
+import com.flightapp.entity.enums.BookingStatus;
+import com.flightapp.entity.enums.MealPreference;
+import com.flightapp.entity.enums.TripType;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class Booking {
     private String pnr;
     private String flightId;
     private String airlineId;
+    @NotBlank
     private String email;
     private int seatCount;
     private TripType tripType;
