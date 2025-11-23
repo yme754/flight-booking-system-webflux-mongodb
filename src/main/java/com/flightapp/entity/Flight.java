@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Flight {
 	@Id
-    private String id;
-    private String airlineId;
+    private Integer id;
+    private Integer airlineId;
     private String fromPlace;
     private String toPlace;
     private LocalDateTime departureTime;

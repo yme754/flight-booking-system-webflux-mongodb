@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Airline {
 	@Id
-	private String id;
+	private Integer id;
 	@NotBlank(message= "Airline name cannot be blank")
     private String name;
     private String logoUrl;

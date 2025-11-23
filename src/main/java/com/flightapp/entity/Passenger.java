@@ -1,6 +1,8 @@
 package com.flightapp.entity;
 
 
+import com.flightapp.entity.enums.Gender;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -14,7 +16,7 @@ public class Passenger {
 	@NotBlank(message = "Name cannot be blank")
 	private String name;
 	@NotBlank(message = "Gender is required")
-    private String gender;
+    private Gender gender;
 	@Min(value = 1, message = "Age must be greater than 0")
     private int age;
     private String email;
