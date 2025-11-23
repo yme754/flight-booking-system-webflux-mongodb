@@ -44,7 +44,11 @@ public class AirlineController {
     }
 	
 	@PostMapping("/inventory/add")
-    public Mono<Flight> addInventory(@RequestBody Flight flight) {
-        return flightService.addFlightInventory(flight);
-    }
+	public Mono<Map<String, Object>> addInventory(@RequestBody Flight flight) {
+	    return flightService.addFlightInventory(flight)
+	        .map(saved -> Map.of(
+	            "id", saved.getId(), "airlineId", saved.getAirlineId()
+	        ));
+	}
+
 }
