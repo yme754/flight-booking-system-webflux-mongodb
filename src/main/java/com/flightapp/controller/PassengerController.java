@@ -15,18 +15,19 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api/v1.0/flight")
+@RequestMapping("/api/v1.0/flight/passenger")
 public class PassengerController {
 	private final PassengerService passengerService;
+
     public PassengerController(PassengerService passengerService) {
         this.passengerService = passengerService;
     }
-    
+
     @PostMapping("/add")
     public Mono<Passenger> addPassenger(@RequestBody Passenger passenger) {
         return passengerService.addPassenger(passenger);
     }
-    
+
     @GetMapping("/{id}")
     public Mono<Passenger> getPassenger(@PathVariable String id) {
         return passengerService.getPassengerById(id);
