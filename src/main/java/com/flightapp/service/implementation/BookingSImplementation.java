@@ -63,12 +63,14 @@ public class BookingSImplementation implements BookingService{
         return bookingRepo.findByEmail(email);
 	}
 	@Override
-	public Mono<Void> cancelTicket(String pnr) {
+	public Mono<String> cancelTicket(String pnr) {
 		return bookingRepo.findByPnr(pnr)
-                .flatMap(b-> {
-                	b.setStatus(BookingStatus.CANCELLED);
-                    return bookingRepo.save(b);
-                }).then();
+		        .flatMap(b -> {
+		            b.setStatus(BookingStatus.CANCELLED);
+		            return bookingRepo.save(b)
+		                    .then(Mono.just("Booking cancelled"));
+		        })
+		        .switchIfEmpty(Mono.error(new RuntimeException("Invalid PNR")));
 	}
 	
 }

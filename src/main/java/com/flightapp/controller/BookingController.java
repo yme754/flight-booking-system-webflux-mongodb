@@ -48,7 +48,7 @@ public class BookingController {
     }
     
     @DeleteMapping("/booking/cancel/{pnr}")
-    public Mono<Void> cancelTicket(@PathVariable String pnr) {
+    public Mono<String> cancelTicket(@PathVariable String pnr) {
         return bookingService.cancelTicket(pnr);
     }
 }
