@@ -1,5 +1,7 @@
 package com.flightapp.service.implementation;
 
+import org.springframework.stereotype.Service;
+
 import com.flightapp.entity.Passenger;
 import com.flightapp.repository.PassengerRepository;
 import com.flightapp.service.PassengerService;
@@ -7,6 +9,7 @@ import com.flightapp.service.PassengerService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Service
 public class PassengerSImplementation implements PassengerService{
 	private final PassengerRepository passengerRepo;
     public PassengerSImplementation(PassengerRepository passengerRepo) {
