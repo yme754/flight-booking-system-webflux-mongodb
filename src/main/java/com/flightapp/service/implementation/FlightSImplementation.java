@@ -34,7 +34,7 @@ public class FlightSImplementation implements FlightService{
 		return flightRepo.findByFromPlaceAndToPlace(fromPlace, toPlace);
 	}
 	@Override
-	public Mono<Flight> getFlight(Integer id) {
+	public Mono<Flight> getFlight(String id) {
 		return flightRepo.findById(id);
 	}
 	@Override

@@ -4,6 +4,6 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 import com.flightapp.entity.Airline;
 
-public interface AirlineRepository extends ReactiveMongoRepository<Airline, Integer>{
+public interface AirlineRepository extends ReactiveMongoRepository<Airline, String>{
 
 }

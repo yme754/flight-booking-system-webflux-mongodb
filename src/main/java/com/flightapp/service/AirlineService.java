@@ -11,5 +11,5 @@ import reactor.core.publisher.Mono;
 public interface AirlineService {
 	Mono<Airline> addAirline(Airline airline);
     Flux<Airline> getAllAirlines();
-    Mono<Airline> getAirlineById(Integer id);
+    Mono<Airline> getAirlineById(String id);
 }

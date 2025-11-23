@@ -9,5 +9,5 @@ public interface FlightService {
 	Mono<Flight> addFlightInventory(Flight flight);
     Flux<Flight> searchFlights(String fromPlace, String toPlace);
     Flux<Flight> getAllFlights();
-    Mono<Flight> getFlight(Integer id);
+    Mono<Flight> getFlight(String id);
 }

@@ -24,7 +24,7 @@ public class AirlineSImplementation implements AirlineService{
 		return airlineRepo.findAll();
 	}
 	@Override
-	public Mono<Airline> getAirlineById(Integer id) {
+	public Mono<Airline> getAirlineById(String id) {
 		return airlineRepo.findById(id);
 	}
 

@@ -6,6 +6,6 @@ import com.flightapp.entity.Flight;
 
 import reactor.core.publisher.Flux;
 
-public interface FlightRepository extends ReactiveMongoRepository<Flight, Integer>{
+public interface FlightRepository extends ReactiveMongoRepository<Flight, String>{
 	Flux<Flight> findByFromPlaceAndToPlace(String fromPlace, String toPlace);
 }

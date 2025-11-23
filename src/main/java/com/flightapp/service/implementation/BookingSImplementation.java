@@ -25,7 +25,7 @@ public class BookingSImplementation implements BookingService{
 		this.bookingRepo = bookingRepo;
 	}
 	@Override
-	public Mono<Booking> bookTicket(Integer flightId, Booking bookingRequest) {
+	public Mono<Booking> bookTicket(String flightId, Booking bookingRequest) {
 		return flightRepo.findById(flightId).flatMap(flight -> {
                     if (bookingRequest.getSeatCount()!= bookingRequest.getSeatNumbers().size())
                         return Mono.error(new RuntimeException("Seat count mismatch"));

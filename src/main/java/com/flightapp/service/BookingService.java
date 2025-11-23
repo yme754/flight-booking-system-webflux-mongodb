@@ -6,7 +6,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface BookingService {
-	Mono<Booking> bookTicket(Integer flightId, Booking bookingRequest);
+	Mono<Booking> bookTicket(String flightId, Booking bookingRequest);
     Mono<Booking> getTicketByPnr(String pnr);
     Flux<Booking> getHistoryByEmail(String email);
     Mono<Void> cancelTicket(String pnr);

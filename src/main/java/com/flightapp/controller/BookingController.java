@@ -1,6 +1,5 @@
 package com.flightapp.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,13 +18,15 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/api/v1.0/flight")
 public class BookingController {
-	@Autowired
     private BookingService bookingService;
+    public BookingController(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
     @PostMapping("/booking/{flightId}")
     public Mono<Booking> bookTicket(
-            @PathVariable Integer flightId,
+    		@PathVariable String flightId,
             @RequestBody BookingRequest request) {
-        Booking booking = new Booking();
+    	Booking booking = new Booking();
         booking.setEmail(request.getEmail());
         booking.setSeatCount(request.getSeatCount());
         booking.setSeatNumbers(request.getSeatNumbers());

@@ -22,10 +22,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Booking {
 	@Id
-    private Integer id;
+    private String id;
     private String pnr;
-    private Integer flightId;
-    private Integer airlineId;
+    private String flightId;
+    private String airlineId;
     @NotBlank
     private String email;
     private int seatCount;
