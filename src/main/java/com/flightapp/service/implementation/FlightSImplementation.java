@@ -44,7 +44,7 @@ public class FlightSImplementation implements FlightService{
 	}
 	@Override
 	public Mono<ResponseEntity<Flight>> getFlightById(String flightId) {
-		// TODO Auto-generated method stub
-		return null;
+		return flightRepo.findById(flightId).map(flight-> ResponseEntity.ok(flight))
+				.defaultIfEmpty(ResponseEntity.notFound().build());
 	}
 }
