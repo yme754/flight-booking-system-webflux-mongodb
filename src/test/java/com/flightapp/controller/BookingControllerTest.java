@@ -20,7 +20,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @WebFluxTest(BookingController.class)
-public class BookingControllerTest {
+class BookingControllerTest {
 	@Autowired
     private WebTestClient webClient;
     @MockBean

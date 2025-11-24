@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
-public class PassengerSImplementationTest {
+class PassengerSImplementationTest {
 	@Mock
     private PassengerRepository passengerRepo;
     private PassengerSImplementation service;

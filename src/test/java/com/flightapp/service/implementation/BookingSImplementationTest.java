@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
-public class BookingSImplementationTest {
+class BookingSImplementationTest {
 	@Mock
     private FlightRepository flightRepo;
     @Mock

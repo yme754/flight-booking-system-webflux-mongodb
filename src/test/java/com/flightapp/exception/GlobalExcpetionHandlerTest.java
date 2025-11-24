@@ -7,7 +7,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
-public class GlobalExcpetionHandlerTest {
+class GlobalExcpetionHandlerTest {
 	private final GlobalExceptionHandler handler = new GlobalExceptionHandler();
 	
     @Test

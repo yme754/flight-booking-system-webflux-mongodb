@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class FlightTest {
+class FlightTest {
 	@Test
     void testFlightEntity() {
         Flight f = new Flight();

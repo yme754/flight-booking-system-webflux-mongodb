@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import com.flightapp.entity.enums.Gender;
 
-public class PassengerTest {
+class PassengerTest {
 	@Test
     void testPassengerEntity() {
         Passenger p = new Passenger();

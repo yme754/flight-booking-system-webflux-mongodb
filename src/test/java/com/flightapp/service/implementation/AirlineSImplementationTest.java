@@ -17,7 +17,7 @@ import reactor.test.StepVerifier;
 
 
 @ExtendWith(MockitoExtension.class)
-public class AirlineSImplementationTest {
+class AirlineSImplementationTest {
 	private final AirlineRepository repo = Mockito.mock(AirlineRepository.class);
     private final AirlineSImplementation service = new AirlineSImplementation(repo);
 
