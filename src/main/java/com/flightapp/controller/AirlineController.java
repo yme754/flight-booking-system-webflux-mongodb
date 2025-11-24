@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.flightapp.dto.AirlineRequest;
+import com.flightapp.dto.FlightInventoryRequest;
 import com.flightapp.entity.Airline;
 import com.flightapp.entity.Flight;
 import com.flightapp.service.AirlineService;
@@ -42,17 +44,26 @@ public class AirlineController {
 	
 	@PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
-    public Mono<Airline> addAirline(@RequestBody Airline airline) {
-        return airlineService.addAirline(airline);
-    }
+	public Mono<Airline> addAirline(@RequestBody AirlineRequest req) {
+	    Airline airline = new Airline();
+	    airline.setName(req.getName());
+	    airline.setLogoUrl(req.getLogoUrl());
+	    return airlineService.addAirline(airline);
+	}
 	
 	@PostMapping("/inventory/add")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Mono<Map<String, Object>> addInventory(@RequestBody Flight flight) {
+	public Mono<Map<String, Object>> addInventory(@RequestBody FlightInventoryRequest req) {
+	    Flight flight = new Flight();
+	    flight.setAirlineId(req.getAirlineId());
+	    flight.setFromPlace(req.getFromPlace());
+	    flight.setToPlace(req.getToPlace());
+	    flight.setAvailableSeats(req.getAvailableSeats());
+	    flight.setOneWayPrice(req.getOneWayPrice());
+	    flight.setRoundTripPrice(req.getRoundTripPrice());
 	    return flightService.addFlightInventory(flight)
-	        .map(saved -> Map.of(
-	            "id", saved.getId(), "airlineId", saved.getAirlineId()
-	        ));
+	           .map(saved -> Map.of("id", saved.getId(), "airlineId", saved.getAirlineId()));
 	}
+
 
 }
