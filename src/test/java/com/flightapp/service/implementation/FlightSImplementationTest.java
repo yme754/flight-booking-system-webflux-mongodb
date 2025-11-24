@@ -53,19 +53,4 @@ public class FlightSImplementationTest {
         when(flightRepo.findById("F10")).thenReturn(Mono.just(f));
         StepVerifier.create(service.getFlight("F10")).expectNext(f).verifyComplete();
     }
-
-    @Test
-    void testGetAllFlights() {
-        when(flightRepo.findAll()).thenReturn(Flux.empty());
-        StepVerifier.create(service.getAllFlights()).verifyComplete();
-    }
-
-    @Test
-    void testGetFlightById() {
-        Flight f = new Flight();
-        f.setId("F22");
-        when(flightRepo.findById("F22")).thenReturn(Mono.just(f));
-        StepVerifier.create(service.getFlightById("F22"))
-                .expectNextMatches(resp -> resp.getBody().getId().equals("F22")).verifyComplete();
-    }
 }

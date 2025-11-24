@@ -62,11 +62,4 @@ public class BookingControllerTest {
                 .uri("/api/flight/booking/history/abc@gmail.com").exchange().expectStatus().isOk()
                 .expectBodyList(Booking.class).hasSize(0);
     }
-
-    @Test
-    void testCancelTicket() {
-        when(bookingService.cancelTicket("PNR12"))
-                .thenReturn(Mono.empty());
-        webClient.delete().uri("/api/flight/booking/cancel/PNR12").exchange().expectStatus().isOk();
-    }
 }

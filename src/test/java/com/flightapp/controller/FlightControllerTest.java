@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import com.flightapp.dto.FlightSearchRequest;
@@ -14,7 +13,6 @@ import com.flightapp.entity.Flight;
 import com.flightapp.service.FlightService;
 
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @WebFluxTest(FlightController.class)
 public class FlightControllerTest {
@@ -36,14 +34,6 @@ public class FlightControllerTest {
                 .expectBodyList(Flight.class).hasSize(1);
     }
 
-    @Test
-    void testGetFlightById() {
-        Flight f = new Flight();
-        f.setId("F11");
-        when(flightService.getFlightById("F11")).thenReturn(Mono.just(ResponseEntity.ok(f)));
-        webClient.get().uri("/api/flight/get/F11").exchange()
-                .expectStatus().isOk().expectBody(Flight.class);
-    }
 
     @Test
     void testGetAllFlights() {

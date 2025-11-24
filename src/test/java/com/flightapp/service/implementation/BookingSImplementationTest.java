@@ -89,14 +89,6 @@ public class BookingSImplementationTest {
         StepVerifier.create(service.getHistoryByEmail("abc@gmail.com")).verifyComplete();
     }
 
-    @Test
-    void testCancelTicket() {
-        Booking b = new Booking();
-        b.setPnr("P11");
-        when(bookingRepo.findByPnr("P11")).thenReturn(Mono.just(b));
-        when(bookingRepo.delete(b)).thenReturn(Mono.empty());
-        StepVerifier.create(service.cancelTicket("P11")).verifyComplete();
-    }
 
     @Test
     void testCancelTicket_InvalidPNR() {

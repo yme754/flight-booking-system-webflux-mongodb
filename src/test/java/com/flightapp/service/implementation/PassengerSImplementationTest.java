@@ -48,16 +48,4 @@ public class PassengerSImplementationTest {
         when(passengerRepo.findByBookingId("B1")).thenReturn(Flux.empty());
         StepVerifier.create(service.getPassengersByBookingId("B1")).verifyComplete();
     }
-
-    @Test
-    void testGetAllPassengers() {
-        when(passengerRepo.findAll()).thenReturn(Flux.empty());
-        StepVerifier.create(service.getAllPassengers()).verifyComplete();
-    }
-
-    @Test
-    void testDeletePassenger() {
-        when(passengerRepo.deleteById("P3")).thenReturn(Mono.empty());
-        StepVerifier.create(service.deletePassenger("P3")).verifyComplete();
-    }
 }

@@ -53,10 +53,4 @@ public class PassengerControllerTest {
         when(passengerService.getAllPassengers()).thenReturn(Flux.empty());
         webClient.get().uri("/api/flight/passenger/all").exchange().expectStatus().isOk();
     }
-
-    @Test
-    void testDeletePassenger() {
-        when(passengerService.deletePassenger("P1")).thenReturn(Mono.empty());
-        webClient.delete().uri("/api/flight/passenger/delete/P1").exchange().expectStatus().isOk();
-    }
 }

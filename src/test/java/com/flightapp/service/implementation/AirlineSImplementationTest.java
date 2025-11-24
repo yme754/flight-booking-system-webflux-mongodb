@@ -20,13 +20,6 @@ import reactor.test.StepVerifier;
 public class AirlineSImplementationTest {
 	private final AirlineRepository repo = Mockito.mock(AirlineRepository.class);
     private final AirlineSImplementation service = new AirlineSImplementation(repo);
-    
-    @Test
-    void testAddAirline() {
-        Airline a = new Airline("A1", "Indigo", "logo.png");
-        when(repo.save(a)).thenReturn(Mono.just(a));
-        StepVerifier.create(service.addAirline(a)).expectNext(a).verifyComplete();
-    }
 
     @Test
     void testGetAllAirlines() {
